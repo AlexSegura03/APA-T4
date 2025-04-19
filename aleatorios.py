@@ -1,4 +1,5 @@
 """
+
     Cuarta tarea de APA - generación de números aleatorios 
     Nombre y apellidos: Alex Segura Medina
 
@@ -53,7 +54,10 @@ class Aleat:
         self.m = m
         self.a = a
         self.c = c
+
         self.x = x0 
+
+        self.x = x0  
         self.initial_seed = x0  # para poder reiniciar con __call__
 
     def __iter__(self):
@@ -69,6 +73,7 @@ class Aleat:
         self.initial_seed = x0
 
 
+
 # FUNCION aleat()
 def aleat(*, m=2**48, a=25214903917, c=11, x0=1212121):
     x = x0
@@ -82,3 +87,5 @@ def aleat(*, m=2**48, a=25214903917, c=11, x0=1212121):
 if __name__ == "__main__":
     import doctest
     doctest.testmod(verbose=True)
+
+

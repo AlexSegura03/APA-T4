@@ -36,6 +36,7 @@ Comprobación de funcionamiento de aleat()
 44
 
 Comprobación de reinicio de aleat()
+>>> rand.send(24)
 38
 >>> for _ in range(4):
 ...     print(next(rand))

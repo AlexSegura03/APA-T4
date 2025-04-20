@@ -165,11 +165,48 @@ Inserte a continuación una captura de pantalla que muestre el resultado de ejec
 fichero `aleatorios.py` con la opción *verbosa*, de manera que se muestre el
 resultado de la ejecución de los tests unitarios.
 
+![Captura de los tests](Test_P4.png)
+
 #### Código desarrollado
 
 Inserte a continuación el código de los métodos desarrollados en esta tarea, usando los
 comandos necesarios para que se realice el realce sintáctico en Python del mismo (no
 vale insertar una imagen o una captura de pantalla, debe hacerse en formato *markdown*).
+
+```python
+# Clase Aleat
+class Aleat:
+  def __init__(self, *, m=2**48, a=25214903917, c=11, x0=1212121):
+        self.m = m
+        self.a = a
+        self.c = c
+
+        self.x = x0 
+
+        self.x = x0  
+        self.initial_seed = x0  # para poder reiniciar con __call__
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.x = (self.a * self.x + self.c) % self.m
+        return self.x
+
+    def __call__(self, x0):
+        """Permite reiniciar la secuencia con una nueva semilla."""
+        self.x = x0
+        self.initial_seed = x0
+
+# Funión aleat()
+def aleat(*, m=2**48, a=25214903917, c=11, x0=1212121):
+  x = x0
+    while True:
+        x = (a * x + c) % m
+        new_seed = (yield x)
+        if new_seed is not None:
+            x = new_seed
+```
 
 #### Subida del resultado al repositorio GitHub y *pull-request*
 

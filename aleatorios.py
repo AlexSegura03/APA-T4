@@ -1,55 +1,51 @@
 """
+Cuarta tarea de APA - generación de números aleatorios 
+Nombre y apellidos: Alex Segura Medina
 
-    Cuarta tarea de APA - generación de números aleatorios 
-    Nombre y apellidos: Alex Segura Medina
+Este fichero implementa un generador de números pseudoaleatorios usando
+el algoritmo de Generación Lineal Congruente (LGC), tanto en forma de clase como de función generadora.
 
-    
-TESTS UNITARIOS:
+Incluye las pruebas unitarias de ambos métodos usando la biblioteca doctest.ç
 
-Comprobación de funcionamiento de Aleat
->>> rand = Aleat(m=32, a=9, c=13, x0=11)
->>> for _ in range(4):
-...     print(next(rand))
-...
-16
-29
-18
-15
-
-Comprobación de reinicio de Aleat
->>> rand(29)
->>> for _ in range(4):
-...     print(next(rand))
-...
-18
-15
-20
-1
-
-Comprobación de funcionamiento de aleat()
->>> rand = aleat(m=64, a=5, c=46, x0=36)
->>> for _ in range(4):
-...     print(next(rand))
-...
-34
-24
-38
-44
-
-Comprobación de reinicio de aleat()
->>> rand.send(24)
-38
->>> for _ in range(4):
-...     print(next(rand))
-...
-44
-10
-32
-14
 """
 
 # CLASE Aleat
 class Aleat:
+    '''
+    Descripción: Generador de números pseudoaleatorios usando el método LGC (Linear Congruential Generator).
+
+    Atributos:
+    - m: Módulo (entero positivo).
+    - a: Multiplicador (entero, 0 < a < m).
+    - c: Incremento (entero, 0 ≤ c < m).
+    - x: Semilla actual.
+    - initial_seed: Guarda la semilla inicial para posibles reinicios.
+
+    Métodos:
+    - __next__(): Genera el siguiente número pseudoaleatorio.
+    - __iter__(): Retorna el propio objeto.
+    - __call__(x0): Reinicia la secuencia con una nueva semilla.
+
+    Pruebas unitarias:
+    >>> rand = Aleat(m=32, a=9, c=13, x0=11)
+    >>> for _ in range(4):
+    ...     print(next(rand))
+    ...
+    16
+    29
+    18
+    15
+
+    >>> rand(29)
+    >>> for _ in range(4):
+    ...     print(next(rand))
+    ...
+    18
+    15
+    20
+    1
+    '''
+
     def __init__(self, *, m=2**48, a=25214903917, c=11, x0=1212121):
         self.m = m
         self.a = a
@@ -76,6 +72,39 @@ class Aleat:
 
 # FUNCION aleat()
 def aleat(*, m=2**48, a=25214903917, c=11, x0=1212121):
+    '''
+    Descripción: Generador de números pseudoaleatorios con el método LGC.
+
+    Argumentos:
+    - m: Módulo (entero positivo).
+    - a: Multiplicador.
+    - c: Incremento.
+    - x0: Semilla inicial.
+
+    Devuelve:
+    Un generador infinito que produce números pseudoaleatorios.
+
+    Pruebas unitarias:
+    >>> rand = aleat(m=64, a=5, c=46, x0=36)
+    >>> for _ in range(4):
+    ...     print(next(rand))
+    ...
+    34
+    24
+    38
+    44
+
+    >>> rand.send(24)
+    38
+    >>> for _ in range(4):
+    ...     print(next(rand))
+    ...
+    44
+    10
+    32
+    14
+    '''
+
     x = x0
     while True:
         x = (a * x + c) % m
